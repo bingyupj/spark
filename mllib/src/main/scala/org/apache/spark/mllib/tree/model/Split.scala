@@ -19,14 +19,17 @@ package org.apache.spark.mllib.tree.model
 
 import org.apache.spark.annotation.DeveloperApi
 import org.apache.spark.mllib.tree.configuration.FeatureType.FeatureType
+import org.apache.spark.mllib.tree.configuration.FeatureType
+import org.apache.spark.mllib.tree.configuration.FeatureType.FeatureType
 
 /**
  * :: DeveloperApi ::
  * Split applied to a feature
  * @param feature feature index
- * @param threshold threshold for continuous feature
+ * @param threshold Threshold for continuous feature.
+ *                  Split left if feature <= threshold, else right.
  * @param featureType type of feature -- categorical or continuous
- * @param categories accepted values for categorical variables
+ * @param categories Split left if categorical feature value is in this set, else right.
  */
 @DeveloperApi
 case class Split(
@@ -35,9 +38,10 @@ case class Split(
     featureType: FeatureType,
     categories: List[Double]) {
 
-  override def toString =
+  override def toString: String = {
     "Feature = " + feature + ", threshold = " + threshold + ", featureType =  " + featureType +
       ", categories = " + categories
+  }
 }
 
 /**
